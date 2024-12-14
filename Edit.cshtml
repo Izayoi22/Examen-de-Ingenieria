@@ -1,0 +1,41 @@
+
+@model TaskManager.Models.Task
+@{
+    ViewBag.Title = "Editar Tarea";
+}
+<link rel="stylesheet" href="~/Content/styles.css" />
+
+
+<h2>Editar Tarea</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id) <!-- Campo oculto para mantener el ID de la tarea -->
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, "Título")
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, "Descripción")
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DueDate, "Fecha de Vencimiento")
+        @Html.TextBoxFor(m => m.DueDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.DueDate, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status, "Estado")
+        @Html.TextBoxFor(m => m.Status, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Status, null, new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="@Url.Action("Index", "Task")" class="btn btn-secondary">Cancelar</a>
+}
