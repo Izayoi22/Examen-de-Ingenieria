@@ -1,0 +1,40 @@
+@model IEnumerable<TaskManager.Models.Task>
+@{
+    ViewBag.Title = "Lista de Tareas";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/Content/styles.css" />
+
+
+<h2>Lista de Tareas</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Task")">Crear nueva tarea</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.DueDate?.ToShortDateString()</td>
+                <td>@task.Status</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Task", new { id = task.Id })">Editar</a> |
+                    <a href="@Url.Action("Delete", "Task", new { id = task.Id })">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
